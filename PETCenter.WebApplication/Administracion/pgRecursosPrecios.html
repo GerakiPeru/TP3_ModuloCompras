@@ -1,0 +1,219 @@
+﻿<script language="javascript" src="/Content/scripts/common/jquery.table2excel.min.js" type="text/javascript"></script>
+
+<div class="container-fluid ContentBanner">
+    <div class="col-md-6">
+        <div class="col-xs-12" style="padding: 5px 5px 5px 5px;height: 29px;">
+            <span>Gestionar Listado de Recursos y Precios por Proveedor</span>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <!--<div class="col-xs-4 col-sm-4 home-buttom" onclick="VerListaPreciosId(0);">
+            <center><i class="fa fa-eye">&nbsp;</i> Busqueda avanzada</center>
+        </div>-->
+        <div class="col-xs-4 col-sm-4"></div>
+        <div class=" col-xs-4 col-sm-4 home-buttom" onclick="getProveedores(); return false;">
+            <center><i class="fa fa-search">&nbsp;</i> Buscar Proveedores</center>
+        </div>
+        <div class="col-xs-4 col-sm-4 home-buttom" onclick="CargaMasiva(); return false;">
+            <center><i class="fa fa-cloud-upload">&nbsp;</i> Carga Masiva</center>
+        </div>
+    </div>
+</div>
+<div class="container-fluid ContentPage">
+    <div id="contentBusquedaAvanzada" class="row">
+        <div class="col-xs-6 col-sm-6 col-md-3">
+            <div class="input-group input-group-sm">
+                <span class="input-group-addon" style="width:130px">Tipo Documento</span>
+                <select class="form-control input-lg text-uppercase" id="TipoDocumentoSearch">
+                    <option value="0">[ Todos ]</option>
+                    <option value="1">DNI</option>
+                    <option value="2">RUC</option>
+                    <option value="3">Carnet Extranjeria</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3">
+            <div class="input-group input-group-sm">
+                <span class="input-group-addon" style="width:130px">Nro Documento</span>
+                <input type="text" class="form-control input-lg text-uppercase" id="txtNroDocumentoSearch" />
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3">
+            <div class="input-group input-group-sm">
+                <span class="input-group-addon" style="width:130px">Código</span>
+                <input type="text" class="form-control input-lg text-uppercase" id="txtCodigoProveedor" />
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3">
+            <div class="input-group input-group-sm">
+                <span class="input-group-addon" style="width:130px">Razón Social</span>
+                <input type="text" class="form-control input-lg text-uppercase" id="txtNombreProveedor" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--GRILLA-->
+<div class="container-fluid ContentBannerBody">
+    <div class="col-xs-12" style="padding: 5px 5px 5px 20px;height: 29px;margin: 0px 0px 0px 0px;">
+        <span>Listado de Proveedores</span>
+    </div>
+</div>
+<div id="grid-view">
+    <div id="gridProveedor" class="label-sm grid-setcursor pull-left">
+    </div>
+</div>
+
+<div class="modal fade" id="ListaModal" tabindex="-1" role="dialog" aria-hidden="true" style="z-index:99997">
+    <div class="modal-dialog" style="width:95%;">
+        <div class="modal-content">
+            <div class="modal-header PopupBanner" id="ListaModal_header">
+            </div>
+            <div class="modal-body" id="ListaModal_body">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-8">
+                    </div>
+                    <div class="row col-xs-6 col-sm-6 col-md-4">
+                        <div class="col-md-5">
+                            <div class="col-xs-12 home-buttom" onclick="BuscarRecursoPresentacion(); return false;">
+                                <center><i class="fa fa-search">&nbsp;&nbsp;</i> Buscar</center>
+                            </div>
+                        </div>                        
+                        <div class="col-md-5 right">
+                            <div class="col-xs-12 home-buttom" onclick="AgregarRecursoProveedor(); return false;">
+                                <center><i class="fa fa-plus">&nbsp;&nbsp;</i> Agregar</center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-4">
+                        <div class="input-group input-group-sm" id="divProveedor">
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-4">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" style="width:130px">Recurso</span>
+                            <input class="form-control input-lg text-uppercase text-uppercase" id="cboRecursoModal" style="width: 200px" />
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-4">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" style="width:130px">Presentación</span>
+                            <input type="text" class="form-control input-lg text-uppercase" id="cboPresentacionModal" style="width: 175px" />
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div id="grid-view1" class="row" style="margin-top:0px;margin-left:1px;margin-right:1px;">
+                    <div id="gridListaModal" class="label-sm grid-setcursor pull-left">
+                    </div>
+                </div>
+                <br />
+            </div>
+            <div class="modal-footer" id="ListaModal_footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="CargaMasivaModal" tabindex="-1" role="dialog" aria-hidden="true" style="z-index:99997">
+    <div class="modal-dialog" style="width:75%;">
+        <div class="modal-content">
+            <div class="modal-header PopupBanner" id="CargaMasivaModal_header">
+            </div>
+            <div class="modal-body" id="CargaMasivaModal_body">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-9">
+                        <div class="input-group input-group-sm" id="divProveedorCargaMasiva">
+                        </div>
+                    </div>
+                    <div class="row col-xs-6 col-sm-6 col-md-3">
+                        <div class="col-md-12">
+                            <div class="col-xs-12 home-buttom" onclick="DecargarPlantilla();">
+                                <center><i class="fa fa-file-excel-o ">&nbsp;&nbsp;</i> Descargar Plantilla</center>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-9">
+                        <div class="input-group input-group-sm" style="height:55px;">
+                            <span class="input-group-addon" style="width:130px">Archivo</span>
+                            <div class="form-control input-lg text-uppercase text-uppercase" style="height:55px;width: 500px;margin:0px 0px 0px 0px;padding: 0px 0px 0px 0px;">
+                                <iframe src="/Administracion/pgRecursosPrecioCargaMasiva.aspx" style="border:0px;width: 500px;height:57px;margin:0px 0px 0px 0px;padding: 0px 0px 0px 0px;"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div id="grid-view1" class="row" style="margin-top:0px;margin-left:1px;margin-right:1px;">
+                    <div id="gridCargaMasivaModal" class="label-sm grid-setcursor pull-left">
+                    </div>
+                </div>
+                <br />
+                <div style="display:none;" id="tableExcel">
+
+                </div>
+            </div>
+            <div class="modal-footer" id="CargaMasivaModal_footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="RecursoModal" tabindex="-1" role="dialog" aria-hidden="true" style="z-index:99998">
+    <div class="modal-dialog" style="width:450px;margin-top:100px">
+        <div class="modal-content">
+            <div class="modal-header PopupBanner" id="RecursoModal_header">
+            </div>
+            <div class="modal-body" id="RecursoModal_body">
+                <div class="row" id="divProveedorRecursoModal">
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" style="width:130px">Recurso</span>
+                            <div id="cboRecursoLineModal_section"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" style="width:130px">Presentación</span>
+                            <div id="cboPresentacionLineModal_section"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" style="width:130px">Valor Unitario S/.</span>
+                            <input type="text" class="form-control input-sm text-uppercase" id="txtPrecioLineModal" style="width: 250px" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" style="width:130px">Activo</span>
+                            <div class="form-control input-lg text-uppercase" style="width:250px">
+                                <input type="image" src="../Content/images/check.png" style="width:20px" id="imgEstadoLineModal" onclick="ChangeEstado();" />
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer" id="RecursoModal_footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../Content/scripts/pet/pgRecursosPrecios.js"></script>
