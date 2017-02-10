@@ -825,13 +825,19 @@ function VerItemsSolicitud(accion, idsolicitudrecurso, idpresentacionrecurso, ca
 
                                 v1 = response.rows[i].cantidadcomprar;
                                 console.log('RESPONDE 8  : ' + v1);
+                                console.log('ESTADO ITEM 1  : ');
                                 $('#processingModal').val('cantidadBuy');
+                                console.log('ESTADO ITEM 2 : ');
 
                                 if(v1 > 0){
                                     $("#txtEstadoTempModal").val('APROBADO');
                                 } else {
                                     $("#txtEstadoTempModal").val('RECHAZADO');
+
+                                    break;
                                 }
+                                console.log('ESTADO ITEM  : ');
+                                console.log('ESTADO ITEM  : ' + $("#txtEstadoTempModal").val());
                             }
 
                             if (response.messageType != "OK")

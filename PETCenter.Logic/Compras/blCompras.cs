@@ -132,7 +132,31 @@ namespace PETCenter.Logic.Compras
                 return 0;
             }
         }
-        
+
+        public int GuardarEvaluacion(string periodo, out Transaction transaction)
+        {
+            try
+            {
+                PETCenter.DataAccess.Configuration.DAO dao = new DAO();
+                daEvaluacionProveedor da = new daEvaluacionProveedor();
+                int result = da.GuardarEvaluacion(periodo);
+                if (result == 0)
+                {
+                    transaction = Common.GetTransaction(TypeTransaction.ERR, "No se realizó la transacción");
+                }
+                else
+                {
+                    transaction = Common.GetTransaction(TypeTransaction.OK, "Operación realizada satisfactoriamente");
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                transaction = Common.GetTransaction(TypeTransaction.ERR, ex.Message);
+                return 0;
+            }
+        }
+
         public Proveedor GetProveedor(int idProveedor, out Transaction transaction)
         {
             try
@@ -147,9 +171,9 @@ namespace PETCenter.Logic.Compras
                 }
                 else
                 {
-                    
-                        transaction = Common.GetTransaction(TypeTransaction.OK, "");
-                    
+
+                    transaction = Common.GetTransaction(TypeTransaction.OK, "");
+
                 }
                 return provl;
             }
@@ -159,6 +183,8 @@ namespace PETCenter.Logic.Compras
                 return new Proveedor();
             }
         }
+        
+        
         #endregion
 
         #region Recursos
@@ -550,5 +576,180 @@ namespace PETCenter.Logic.Compras
         }
         #endregion
 
-    }
+    
+
+    #region EvaluacionProveedor
+
+    public CollectionEvaluacionProveedor GetEvaluaciones_Busqueda(int idevaluacionproveedor, string nroevaluacion, string periodo, int proveedor, int calificado)
+        {
+            try
+            {
+                PETCenter.DataAccess.Configuration.DAO dao = new DAO();
+                Transaction transaction;
+                daEvaluacionProveedor da = new daEvaluacionProveedor();
+                List<EvaluacionProveedor> eval = da.GetEvaluaciones_Busqueda(idevaluacionproveedor, nroevaluacion, periodo, proveedor, calificado);
+                if (eval.Count() == 0)
+                {
+                    transaction = Common.GetTransaction(TypeTransaction.ERR, "No existen evaluaciones disponibles");
+                }
+                else
+                {
+                    transaction = Common.GetTransaction(TypeTransaction.OK, "");
+                }
+                return new CollectionEvaluacionProveedor(eval, transaction);
+            }
+            catch (Exception ex)
+            {
+                return new CollectionEvaluacionProveedor(Common.GetTransaction(TypeTransaction.ERR, ex.Message));
+            }
+        }
+
+        public CollectionGenerador Genera_Evaluacion(string periodo)
+        {
+            try
+            {
+                PETCenter.DataAccess.Configuration.DAO dao = new DAO();
+                Transaction transaction;
+                daEvaluacionProveedor da = new daEvaluacionProveedor();
+                List<Generador> eval = da.Genera_Evaluacion(periodo);
+                if (eval.Count() == 0)
+                {
+                    transaction = Common.GetTransaction(TypeTransaction.ERR, "No existen evaluaciones disponibles");
+                }
+                else
+                {
+                    transaction = Common.GetTransaction(TypeTransaction.OK, "");
+                }
+                return new CollectionGenerador(eval, transaction);
+            }
+            catch (Exception ex)
+            {
+                return new CollectionGenerador(Common.GetTransaction(TypeTransaction.ERR, ex.Message));
+            }
+        }
+
+        public CollectionOrdenCompra GetOrdenCompraxProveedor(string periodo, int idProveedor)
+        {
+            try
+            {
+                PETCenter.DataAccess.Configuration.DAO dao = new DAO();
+                Transaction transaction;
+                daEvaluacionProveedor da = new daEvaluacionProveedor();
+                List<OrdenCompra> eval = da.GetOrdenCompraxProveedor(periodo, idProveedor);
+                if (eval.Count() == 0)
+                {
+                    transaction = Common.GetTransaction(TypeTransaction.ERR, "No existen evaluaciones disponibles");
+                }
+                else
+                {
+                    transaction = Common.GetTransaction(TypeTransaction.OK, "");
+                }
+                return new CollectionOrdenCompra(eval, transaction);
+            }
+            catch (Exception ex)
+            {
+                return new CollectionOrdenCompra(Common.GetTransaction(TypeTransaction.ERR, ex.Message));
+            }
+        }
+
+        public CollectionIncidenciaProveedor GetIncidenciaxProveedor(string periodo, int idProveedor)
+        {
+            try
+            {
+                PETCenter.DataAccess.Configuration.DAO dao = new DAO();
+                Transaction transaction;
+                daEvaluacionProveedor da = new daEvaluacionProveedor();
+                List<IncidenciaProveedor> eval = da.GetIncidenciaxProveedor(periodo, idProveedor);
+                if (eval.Count() == 0)
+                {
+                    transaction = Common.GetTransaction(TypeTransaction.ERR, "No existen evaluaciones disponibles");
+                }
+                else
+                {
+                    transaction = Common.GetTransaction(TypeTransaction.OK, "");
+                }
+                return new CollectionIncidenciaProveedor(eval, transaction);
+            }
+            catch (Exception ex)
+            {
+                return new CollectionIncidenciaProveedor(Common.GetTransaction(TypeTransaction.ERR, ex.Message));
+            }
+        }
+
+        public CollectionOrdenCompra GetDetalleOrdenesEvaluacion(string periodo, int idProveedor)
+        {
+            try
+            {
+                PETCenter.DataAccess.Configuration.DAO dao = new DAO();
+                Transaction transaction;
+                daEvaluacionProveedor da = new daEvaluacionProveedor();
+                List<OrdenCompra> eval = da.GetOrdenCompraxProveedor(periodo, idProveedor);
+                if (eval.Count() == 0)
+                {
+                    transaction = Common.GetTransaction(TypeTransaction.ERR, "No existen ordenes disponibles");
+                }
+                else
+                {
+                    transaction = Common.GetTransaction(TypeTransaction.OK, "");
+                }
+                return new CollectionOrdenCompra(eval, transaction);
+            }
+            catch (Exception ex)
+            {
+                return new CollectionOrdenCompra(Common.GetTransaction(TypeTransaction.ERR, ex.Message));
+            }
+        }
+
+        
+
+        public CollectionOrdenCompraEvaluacion GetDetalleOrdenesEvaluacion(int idevaluacionproveedor)
+        {
+            try
+            {
+                PETCenter.DataAccess.Configuration.DAO dao = new DAO();
+                Transaction transaction;
+                daEvaluacionProveedor da = new daEvaluacionProveedor();
+                List<OrdenCompraEvaluacion> eval = da.GetDetalleOrdenesEvaluacion(idevaluacionproveedor);
+                if (eval.Count() == 0)
+                {
+                    transaction = Common.GetTransaction(TypeTransaction.ERR, "No existen evaluaciones disponibles");
+                }
+                else
+                {
+                    transaction = Common.GetTransaction(TypeTransaction.OK, "");
+                }
+                return new CollectionOrdenCompraEvaluacion(eval, transaction);
+            }
+            catch (Exception ex)
+            {
+                return new CollectionOrdenCompraEvaluacion(Common.GetTransaction(TypeTransaction.ERR, ex.Message));
+            }
+        }
+
+        public CollectionIncidenciaEvaluacion GetDetalleIncidenciasEvaluacion(int idevaluacionproveedor)
+        {
+            try
+            {
+                PETCenter.DataAccess.Configuration.DAO dao = new DAO();
+                Transaction transaction;
+                daEvaluacionProveedor da = new daEvaluacionProveedor();
+                List<IncidenciaEvaluacion> eval = da.GetDetalleIncidenciasEvaluacion(idevaluacionproveedor);
+                if (eval.Count() == 0)
+                {
+                    transaction = Common.GetTransaction(TypeTransaction.ERR, "No existen evaluaciones disponibles");
+                }
+                else
+                {
+                    transaction = Common.GetTransaction(TypeTransaction.OK, "");
+                }
+                return new CollectionIncidenciaEvaluacion(eval, transaction);
+            }
+            catch (Exception ex)
+            {
+                return new CollectionIncidenciaEvaluacion(Common.GetTransaction(TypeTransaction.ERR, ex.Message));
+            }
+        }
+
+#endregion
+}
 }

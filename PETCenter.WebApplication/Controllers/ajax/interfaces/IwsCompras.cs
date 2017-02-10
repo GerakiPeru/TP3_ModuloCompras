@@ -167,6 +167,51 @@ namespace PETCenter.WebApplication.Controllers.ajax
         string GetRecursoProveedorExel(int idproveedor, int idrecurso, int idpresentacion, int idproveedorecurso);
         #endregion
 
+        #region EvaluacionProveedor
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "GuardarEvaluacion", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        string GuardarEvaluacion(string
+            periodo);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "GetEvaluaciones_Busqueda", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        CollectionEvaluacionProveedor GetEvaluaciones_Busqueda(int idevaluacionproveedor, string nroevaluacion, string periodo, int proveedor, int calificado);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "Genera_Evaluacion", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        CollectionGenerador Genera_Evaluacion(string periodo);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "GetOrdenCompraxProveedor", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        CollectionOrdenCompra GetOrdenCompraxProveedor(string periodo, int idProveedor);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "GetIncidenciaxProveedor", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        CollectionIncidenciaProveedor GetIncidenciaxProveedor(string periodo, int idProveedor);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "GetProveedorListado", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        CollectionProveedores GetProveedorListado(int idProveedor);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "GetDetalleOrdenesEvaluacion", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        CollectionOrdenCompraEvaluacion GetDetalleOrdenesEvaluacion(int idevaluacionproveedor);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "GetDetalleIncidenciasEvaluacion", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        CollectionIncidenciaEvaluacion GetDetalleIncidenciasEvaluacion(int idevaluacionproveedor);
+
+        #endregion
+
     }
 
 

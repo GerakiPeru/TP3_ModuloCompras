@@ -64,6 +64,7 @@
     <Compile Include="Compras\daEmpleado.cs" />
     <Compile Include="Compras\daArea.cs" />
     <Compile Include="Compras\daCompras.cs" />
+    <Compile Include="Compras\daEvaluacionProveedor.cs" />
     <Compile Include="Compras\daPresentacionRecurso.cs" />
     <Compile Include="Compras\daItemSolicitudRecurso.cs" />
     <Compile Include="Compras\daRecursoProveedor.cs" />

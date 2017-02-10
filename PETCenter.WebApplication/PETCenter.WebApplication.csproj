@@ -355,6 +355,7 @@
     <Content Include="Content\scripts\pet\pgAprobarInformacionSolicitud.js" />
     <Content Include="Content\scripts\pet\pgActualizarInformacionSolicitud.js" />
     <Content Include="Content\scripts\pet\pgAprobarSolicitudRecursos.js" />
+    <Content Include="Content\scripts\pet\pgEvaluacionProveedor.js" />
     <Content Include="Content\scripts\pet\pgRecursosPrecios.js" />
     <Content Include="Content\scripts\pet\planCompras.js" />
     <Content Include="Content\scripts\pet\proveedor.js" />

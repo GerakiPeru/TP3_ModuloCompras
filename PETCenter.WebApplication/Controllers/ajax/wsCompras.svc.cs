@@ -31,6 +31,14 @@ namespace PETCenter.WebApplication.Controllers.ajax
                 return new Proveedor();
         }
 
+        public CollectionProveedores GetProveedorListado(int idProveedor)
+        {
+            blCompras bl = new blCompras();
+            CollectionProveedores ocol = bl.GetProveedor_Id(idProveedor);
+            ocol.rows.Insert(0, new Proveedor() { idProveedor = 0, RazonSocial = "[ SELECCIONE ]", Codigo = "" });
+            return ocol;
+        }
+
         public CollectionProveedores GetProveedores()
         {
             blCompras bl = new blCompras();
@@ -547,6 +555,70 @@ namespace PETCenter.WebApplication.Controllers.ajax
             
         }
         
+        #endregion
+
+        #region EvaluacionProveedor
+
+        public CollectionEvaluacionProveedor GetEvaluaciones_Busqueda(int idevaluacionproveedor, string nroevaluacion, string periodo, int proveedor, int calificado)
+        {
+            blCompras bl = new blCompras();
+            CollectionEvaluacionProveedor ecol = bl.GetEvaluaciones_Busqueda(idevaluacionproveedor, nroevaluacion, periodo, proveedor, calificado);
+            return ecol;
+        }
+
+        public CollectionGenerador Genera_Evaluacion(string periodo)
+        {
+            blCompras bl = new blCompras();
+            CollectionGenerador ecol = bl.Genera_Evaluacion(periodo);
+            return ecol;
+        }
+
+        public CollectionOrdenCompra GetOrdenCompraxProveedor(string periodo, int idProveedor)
+        {
+            blCompras bl = new blCompras();
+            CollectionOrdenCompra ecol = bl.GetOrdenCompraxProveedor(periodo, idProveedor);
+            return ecol;
+        }
+
+        public CollectionIncidenciaProveedor GetIncidenciaxProveedor(string periodo, int idProveedor)
+        {
+            blCompras bl = new blCompras();
+            CollectionIncidenciaProveedor ecol = bl.GetIncidenciaxProveedor(periodo, idProveedor);
+            return ecol;
+        }
+
+        public string GuardarEvaluacion(string periodo)
+        {
+            Usuario user = (Usuario)System.Web.HttpContext.Current.Session[Constant.nameUser];
+
+            blCompras bl = new blCompras();
+
+            Transaction transaction = Common.InitTransaction();
+
+
+            int result = bl.GuardarEvaluacion(periodo, out transaction);
+            if (transaction.type == TypeTransaction.OK)
+            {
+                return Common.InvokeTextHTML(string.Format("showSuccess(\"{0}\");$('#GeneradorModal').modal('hide');getEvaluaciones(0);", transaction.message));
+            }
+            else
+                return Common.InvokeTextHTML(string.Format("showError(\"{0}\");", transaction.message));
+        }
+
+        public CollectionOrdenCompraEvaluacion GetDetalleOrdenesEvaluacion(int idevaluacionproveedor)
+        {
+            blCompras bl = new blCompras();
+            CollectionOrdenCompraEvaluacion ocol = bl.GetDetalleOrdenesEvaluacion(idevaluacionproveedor);
+            return ocol;
+        }
+
+        public CollectionIncidenciaEvaluacion GetDetalleIncidenciasEvaluacion(int idevaluacionproveedor)
+        {
+            blCompras bl = new blCompras();
+            CollectionIncidenciaEvaluacion ocol = bl.GetDetalleIncidenciasEvaluacion(idevaluacionproveedor);
+            return ocol;
+        }
+
         #endregion
     }
 }

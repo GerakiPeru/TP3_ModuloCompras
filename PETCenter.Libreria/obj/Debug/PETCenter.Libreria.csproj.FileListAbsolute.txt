@@ -17,3 +17,8 @@ C:\Users\Israel\Documents\UPC\Taller de Proyectos 3\Version 6\Modulo Proveedores
 C:\Users\Israel\Documents\UPC\Taller de Proyectos 3\Version 6\Modulo Proveedores y Compras\PETCenter.Libreria\bin\Debug\PETCenter.Libreria.pdb
 C:\Users\Israel\Documents\UPC\Taller de Proyectos 3\Version 6\Modulo Proveedores y Compras\PETCenter.Libreria\obj\Debug\PETCenter.Libreria.dll
 C:\Users\Israel\Documents\UPC\Taller de Proyectos 3\Version 6\Modulo Proveedores y Compras\PETCenter.Libreria\obj\Debug\PETCenter.Libreria.pdb
+C:\Users\Israel\Documents\UPC\Taller de Proyectos 3\Version 8\TP3_ModuloCompras\PETCenter.Libreria\bin\Debug\PETCenter.Libreria.dll
+C:\Users\Israel\Documents\UPC\Taller de Proyectos 3\Version 8\TP3_ModuloCompras\PETCenter.Libreria\bin\Debug\PETCenter.Libreria.pdb
+C:\Users\Israel\Documents\UPC\Taller de Proyectos 3\Version 8\TP3_ModuloCompras\PETCenter.Libreria\obj\Debug\PETCenter.Libreria.csprojResolveAssemblyReference.cache
+C:\Users\Israel\Documents\UPC\Taller de Proyectos 3\Version 8\TP3_ModuloCompras\PETCenter.Libreria\obj\Debug\PETCenter.Libreria.dll
+C:\Users\Israel\Documents\UPC\Taller de Proyectos 3\Version 8\TP3_ModuloCompras\PETCenter.Libreria\obj\Debug\PETCenter.Libreria.pdb
