@@ -240,7 +240,9 @@ function AprobarSolicitud() {
     var params = JSON.stringify({
         "solicitud": $('#hdIdSolicitudRecursoPopup').val(),
         "motivo": $("#taMotivo").val() || '',
-        "estado": $("#txtEstadoTempModal").val() == 'APROBADO' ? 'APR' : 'REC' || ''
+        "estado": $("#txtEstadoTempModal").val() == 'APROBADO' ? 'APR' : 'REC' || '',
+        "saldofinal": $("#txtSaldoFinalModal").val()
+
     });
     $.ajax({
         type: "POST",

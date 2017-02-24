@@ -391,14 +391,14 @@ namespace PETCenter.Logic.Compras
             }
         }
 
-        public int AprobarSolicitudRecursos(int solicitudrecurso, string motivo, string estado, out Transaction transaction)
+        public int AprobarSolicitudRecursos(int solicitudrecurso, string motivo, string estado,int saldofinal, out Transaction transaction)
         {
             try
             {
                 PETCenter.DataAccess.Configuration.DAO dao = new DAO();
                 transaction = Common.GetTransaction(TypeTransaction.OK, "");
                 daSolicitudRecursos da = new daSolicitudRecursos();
-                int result = da.AprobarSolicitudRecursos(solicitudrecurso, motivo, estado);
+                int result = da.AprobarSolicitudRecursos(solicitudrecurso, motivo, estado, saldofinal);
                 if (result == 0)
                 {
                     transaction = Common.GetTransaction(TypeTransaction.ERR, "No se realizó la transacción");

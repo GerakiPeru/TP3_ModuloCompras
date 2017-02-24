@@ -94,7 +94,7 @@ namespace PETCenter.DataAccess.Compras
 
         }
 
-        public int AprobarSolicitudRecursos(int Solicitud, string Motivo, string estado)
+        public int AprobarSolicitudRecursos(int Solicitud, string Motivo, string estado, int saldofinal)
         {
             Database db = DatabaseFactory.CreateDatabase(connectionAzure);
             int nresult = -1;
@@ -108,6 +108,7 @@ namespace PETCenter.DataAccess.Compras
                     db.AddInParameter(dbCommand, "@idSolicitudRecurso", System.Data.DbType.Int32, Solicitud);
                     db.AddInParameter(dbCommand, "@Motivo", System.Data.DbType.String, Motivo);
                     db.AddInParameter(dbCommand, "@Estado", System.Data.DbType.String, estado);
+                    db.AddInParameter(dbCommand, "@saldofinal", System.Data.DbType.Int64, saldofinal);
                     nresult = db.ExecuteNonQuery(dbCommand, transaction);
 
                     if (nresult == -1)

@@ -80,7 +80,7 @@ namespace PETCenter.WebApplication.Controllers.ajax
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "AprobarSolicitudRecursos", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
             BodyStyle = WebMessageBodyStyle.WrappedRequest)]
-        string AprobarSolicitudRecursos(int solicitud, string motivo, string estado);
+        string AprobarSolicitudRecursos(int solicitud, string motivo, string estado, int saldofinal);
 
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "ActualizarSolicitudRecursos", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,

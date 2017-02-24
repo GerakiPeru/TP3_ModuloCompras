@@ -203,7 +203,7 @@ namespace PETCenter.WebApplication.Controllers.ajax
                 return Common.InvokeTextHTML(string.Format("showError(\"{0}\");", transaction.message));
         }
 
-        public string AprobarSolicitudRecursos(int solicitud, string motivo, string estado)
+        public string AprobarSolicitudRecursos(int solicitud, string motivo, string estado, int saldofinal)
         {
             Usuario user = (Usuario)System.Web.HttpContext.Current.Session[Constant.nameUser];
 
@@ -211,7 +211,7 @@ namespace PETCenter.WebApplication.Controllers.ajax
             Transaction transaction = Common.InitTransaction();
             int result = 0;
 
-            result = bl.AprobarSolicitudRecursos(solicitud, motivo, estado, out transaction);
+            result = bl.AprobarSolicitudRecursos(solicitud, motivo, estado, saldofinal, out transaction);
             if (transaction.type == TypeTransaction.OK)
             {
                 return Common.InvokeTextHTML(string.Format("showSuccess('{0}');$('#SolicitudModal').modal('hide');getSolicitudRecursos();", transaction.message));
